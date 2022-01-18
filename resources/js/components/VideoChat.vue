@@ -64,8 +64,8 @@ export default {
       // To show pusher errors
       // Pusher.logToConsole = true;
       
-      // const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      // const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       const videoHere = this.$refs['video-here'];
       videoHere.srcObject = stream;
       this.stream = stream;

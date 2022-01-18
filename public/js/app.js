@@ -2055,11 +2055,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return navigator.mediaDevices.getUserMedia({
-                  video: true
+                  video: true,
+                  audio: true
                 });
 
               case 2:
                 stream = _context.sent;
+                // const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 videoHere = _this2.$refs['video-here'];
                 videoHere.srcObject = stream;
                 _this2.stream = stream;
