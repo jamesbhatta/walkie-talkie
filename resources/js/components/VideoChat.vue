@@ -38,12 +38,14 @@ export default {
           trickle: false
         });
         peer.on('signal', (data) => {
+          console.log('peer data', data);
           this.channel.trigger(`client-signal-${userId}`, {
             userId: this.user.id,
             data: data
           });
         })
         .on('stream', (stream) => {
+          console.log('stream', stream);
           const videoThere = this.$refs['video-there'];
           videoThere.srcObject = stream;
         })
@@ -62,8 +64,8 @@ export default {
       // To show pusher errors
       // Pusher.logToConsole = true;
       
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      // const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       const videoHere = this.$refs['video-here'];
       videoHere.srcObject = stream;
       this.stream = stream;
@@ -71,6 +73,7 @@ export default {
       this.channel = pusher.subscribe('presence-video-chat');
       this.channel.bind(`client-signal-${this.user.id}`, (signal) => 
       {
+        console.log('signal data', signal.data);
         const peer = this.getPeer(signal.userId, false);
         peer.signal(signal.data);
       });
